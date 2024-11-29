@@ -4,51 +4,94 @@ using System.Collections;
 
 public class Card : MonoBehaviour
 {
-    public bool isCardFrontFaceActive;
-    Button button;
+    private CardDataSO cardDataSO;
+    public GameObject backFace;
 
-    private void Awake()
-    {
-        button = GetComponent<Button>();
-    }
+    public Image img;
+    private Button button;
+
+    public bool isCardFrontFaceActive;
+    private bool isRotating;
+    private bool cardFlipped;
+    private float duration = 1f;
+
+
+
     private void Start()
     {
-        button.onClick.AddListener(() => { ShowFace(); });
+        backFace.SetActive(true);
+        button = GetComponent<Button>();
+        button.onClick.AddListener(() => { ShowCardFace(); });
     }
 
-    
+
     private void Update()
     {
         if (Input.GetKeyDown(KeyCode.Space))
-            Reset();
+            HideCardFace();
+    }
+    public void Initilize(CardDataSO data, float rotDuration)
+    {
+        cardDataSO = data;
+        img.sprite = cardDataSO.sprite;
+        duration = rotDuration;
+    }
+    public CardDataSO GetCardData() => cardDataSO;
+
+
+    private void ShowCardFace()
+    {
+        if (isCardFrontFaceActive || isRotating) return;
+
+        StartCoroutine(PlayShowAnimation());
+    }
+    public void HideCardFace()
+    {
+        StartCoroutine(PlayHideAnimation());
     }
 
-    private void ShowFace()
-    {
-        if (isCardFrontFaceActive) return;
 
-        StartCoroutine(CalculateFlip());
-    }
-    private void Reset()
+    private IEnumerator PlayShowAnimation()
     {
-        StartCoroutine(CalculateFlip(1));
+        yield return StartFlipAnimation();
     }
-    private IEnumerator CalculateFlip(int rotStepMultiplier = 1)
+    private IEnumerator PlayHideAnimation()
     {
-        int rotSpeed = 5 * rotStepMultiplier;
-        for (int i = 0; i < 180; i += rotSpeed)
+        yield return StartFlipAnimation();
+    }
+    private IEnumerator StartFlipAnimation()
+    {
+        isRotating = true;
+        cardFlipped = false;
+
+        // Get the starting Y rotation
+        float startYRotation = transform.eulerAngles.y;
+        float targetYRotation = startYRotation + 180f; // Rotate by 180 degrees
+
+        float elapsedTime = 0f;
+        while (elapsedTime < duration)
         {
-            yield return new WaitForSeconds(0.001f);
-            transform.Rotate(Vector3.up * rotSpeed);
+            float t = elapsedTime / duration;
+            float currentYRotation = Mathf.Lerp(startYRotation, targetYRotation, t);
+            transform.rotation = Quaternion.Euler(0f, currentYRotation, 0f);
 
-            if (i == 90)            
-                Flip();            
+            if (!cardFlipped) Flip(currentYRotation);
+
+            elapsedTime += Time.deltaTime;
+            yield return null;
         }
-        yield return new WaitForSeconds(1);
+
+        transform.rotation = Quaternion.Euler(0f, targetYRotation, 0f);
+        isRotating = false;
     }
 
-    private void Flip()
+    private void Flip(float currentYRotation)
     {
-        isCardFrontFaceActive = !isCardFrontFaceActive;
+        if (currentYRotation >= 90f && currentYRotation < 95f || currentYRotation >= 270 && currentYRotation < 275f)
+        {
+            isCardFrontFaceActive = !isCardFrontFaceActive;
+            backFace.SetActive(!isCardFrontFaceActive);
+            cardFlipped = true;
+        }
     }
 }
