@@ -1746,7 +1746,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.5}
   m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 157.00006, y: -175}
+  m_AnchoredPosition: {x: 157, y: -175}
   m_SizeDelta: {x: 505.38, y: 278.47}
   m_Pivot: {x: 0, y: 0.5}
 --- !u!114 &717043223
@@ -3272,6 +3272,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38af619a5c23e054e8e3a5f48aa5f1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  gameCompletePanel: {fileID: 1863262962}
+  matchesText: {fileID: 1179770127}
+  turnsText: {fileID: 311437709}
 --- !u!1 &1498082941
 GameObject:
   m_ObjectHideFlags: 0
@@ -4042,7 +4045,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 240.00006, y: -540}
+  m_AnchoredPosition: {x: 240, y: -540}
   m_SizeDelta: {x: 480.00006, y: 1080}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1952134288

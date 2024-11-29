@@ -17,6 +17,10 @@ public class GameManager : MonoBehaviour
     public event Action OnMatch;
     public event Action OnMismatch;
 
+    public event Action OnGameComplete;
+    public event Action<int> OnTurnUpdated;
+    public event Action<int> OnMatchUpdated;
+
     private void Awake()
     {
         instance = this;
@@ -48,6 +52,8 @@ public class GameManager : MonoBehaviour
     private IEnumerator CheckCards()
     {
         turns++;
+        OnTurnUpdated?.Invoke(turns);
+
         Card fCard = firstCard;
         Card sCard = secondCard;
 
@@ -57,6 +63,9 @@ public class GameManager : MonoBehaviour
         if (fCard.GetCardData().cardNumber == sCard.GetCardData().cardNumber)
         {
             OnMatch?.Invoke();
+            matchedPairs++;
+            OnMatchUpdated?.Invoke(matchedPairs);
+
             yield return new WaitForSeconds(.5f);
             Matched(fCard, sCard);
         }
@@ -76,10 +85,8 @@ public class GameManager : MonoBehaviour
         fCard.gameObject.SetActive(false);
         sCard.gameObject.SetActive(false);
 
-        matchedPairs++;
+
         if (matchedPairs == totalPairs)
-        {
-            Debug.Log("hello game");
-        }
+            OnGameComplete?.Invoke();
     }
 }
