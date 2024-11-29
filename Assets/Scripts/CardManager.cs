@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class CardManager : MonoBehaviour
@@ -20,7 +21,6 @@ public class CardManager : MonoBehaviour
 
     public void Initilize()
     {
-        cardLayoutManager.enabled = true;
         totalCards = rows * columns;
 
         List<int> tempPairs = GeneratePairData();
@@ -62,6 +62,8 @@ public class CardManager : MonoBehaviour
 
     private void GenerateCards()
     {
+        cardLayoutManager.enabled = true;
+
         cards.Clear();
         foreach (Transform child in cardLayoutManager.transform)
         {
@@ -85,4 +87,30 @@ public class CardManager : MonoBehaviour
     {
         cardLayoutManager.enabled = false;
     }
+
+
+    #region save and laod
+    public void Save(ref CardManagerSaveData data)
+    {
+        data.rows = rows;
+        data.columns = columns;
+        data.selectedNumbers = selectedNumbers.ToArray();
+    }
+    public void Load(CardManagerSaveData data)
+    {
+        rows = data.rows; columns = data.columns;
+        totalCards = rows * columns;
+        selectedNumbers = data.selectedNumbers.ToList();
+        GenerateCards();
+    }
+    #endregion
+}
+
+[System.Serializable]
+public struct CardManagerSaveData
+{
+    public int rows;
+    public int columns;
+
+    public int[] selectedNumbers;
 }

@@ -1,9 +1,16 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
 {
     private GameManager gameManager;
+
+    [SerializeField] private Button playButton;
+    [SerializeField] private Button loadButton;
+
+    [SerializeField] private GameObject menuPanel;
+    [SerializeField] private GameObject gamepanel;
     [SerializeField] private GameObject gameCompletePanel;
 
     [SerializeField] private TextMeshProUGUI matchesText;
@@ -12,7 +19,10 @@ public class UIManager : MonoBehaviour
 
     private void Start()
     {
+        menuPanel.SetActive(true);
+        gamepanel.SetActive(false);
         gameCompletePanel.SetActive(false);
+
         gameManager = GameManager.instance;
 
         matchesText.text = 0.ToString();

@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 220472596}
   - component: {fileID: 220472595}
   m_Layer: 5
-  m_Name: Panel
+  m_Name: Game Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1792,7 +1792,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 717043224}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 904261035}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 220472591}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1334317410}
+        m_TargetAssemblyTypeName: GameManager, Assembly-CSharp
+        m_MethodName: LoadGame
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &717043224
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1996,7 +2032,7 @@ GameObject:
   - component: {fileID: 904261038}
   - component: {fileID: 904261037}
   m_Layer: 5
-  m_Name: Main Panel
+  m_Name: Menu Panel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3272,6 +3308,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38af619a5c23e054e8e3a5f48aa5f1d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playButton: {fileID: 234845083}
+  loadButton: {fileID: 717043223}
+  menuPanel: {fileID: 904261035}
+  gamepanel: {fileID: 220472591}
   gameCompletePanel: {fileID: 1863262962}
   matchesText: {fileID: 1179770127}
   turnsText: {fileID: 311437709}

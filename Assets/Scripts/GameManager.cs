@@ -36,6 +36,28 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void SaveGame()
+    {
+        SaveSystem.Save();
+    }
+    public void LoadGame()
+    {
+        SaveSystem.Load();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.S))
+        {
+            SaveGame();
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            LoadGame();
+        }
+    }
+
+
     public void PlayFlipCardSound() => OnCardFlip?.Invoke();
     public void OnCardSelected(Card card)
     {
@@ -89,4 +111,31 @@ public class GameManager : MonoBehaviour
         if (matchedPairs == totalPairs)
             OnGameComplete?.Invoke();
     }
+
+
+    #region Save and load
+
+    public void Save(ref GameSaveData data)
+    {
+        data.totalPairs = totalPairs;
+        data.matchedPairs = matchedPairs;
+        data.turns = turns;
+    }
+    public void Load(GameSaveData data)
+    {
+        totalPairs = data.totalPairs;
+        matchedPairs = data.matchedPairs; OnMatchUpdated?.Invoke(matchedPairs);
+        turns = data.turns; OnTurnUpdated?.Invoke(turns);
+    }
+
+    #endregion
+}
+
+
+[System.Serializable]
+public struct GameSaveData
+{
+    public int totalPairs;
+    public int matchedPairs;
+    public int turns;
 }
