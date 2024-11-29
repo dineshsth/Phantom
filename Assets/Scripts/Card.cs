@@ -15,8 +15,6 @@ public class Card : MonoBehaviour
     private bool cardFlipped;
     private float duration = 1f;
 
-
-
     private void Start()
     {
         backFace.SetActive(true);
@@ -54,6 +52,7 @@ public class Card : MonoBehaviour
     private IEnumerator PlayShowAnimation()
     {
         yield return StartFlipAnimation();
+        GameManager.instance.OnCardSelected(this);
     }
     private IEnumerator PlayHideAnimation()
     {
