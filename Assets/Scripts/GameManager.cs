@@ -22,21 +22,13 @@ public class GameManager : MonoBehaviour
         instance = this;
     }
 
-    private void Update()
+    public void StartNewGame()
     {
-        StartNewGame();
-    }
-
-    private void StartNewGame()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (cardManager != null)
         {
-            if (cardManager != null)
-            {
-                cardManager.Initilize();
-                totalPairs = cardManager.totalCards / 2;
-                matchedPairs = 0;
-            }
+            cardManager.Initilize();
+            totalPairs = cardManager.totalCards / 2;
+            matchedPairs = 0;
         }
     }
 
