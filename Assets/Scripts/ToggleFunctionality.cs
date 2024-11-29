@@ -18,13 +18,7 @@ public class ToggleFunctionality : MonoBehaviour
     {
         if (toggleValue)
         {
-            GameManager.instance.cardManager.rows = rows;
-            GameManager.instance.cardManager.columns = columns;
+            GameManager.instance.cardManager.SetRowsAndColumns(rows, columns);
         }
-    }
-
-    public void ToggleValueThroughScript()
-    {
-        toggle.isOn = !toggle.isOn;
     }
 }

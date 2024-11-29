@@ -10,13 +10,11 @@ public class Card : MonoBehaviour
     public Image img;
     private Button button;
 
-    public bool isCardFrontFaceActive;
+    private bool isCardFrontFaceActive;
     private bool isRotating;
     private bool cardFlipped;
     private float duration = 1f;
     private int cardPositionIndex;
-
-
 
     private void Start()
     {

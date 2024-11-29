@@ -3,9 +3,10 @@ using UnityEngine;
 public class SoundManager : MonoBehaviour
 {
     private AudioSource audioSource;
-    public AudioClip flipSound;
-    public AudioClip matchSound;
-    public AudioClip mismatchSound;
+    [SerializeField] private AudioClip flipAudioClip;
+    [SerializeField] private AudioClip matchAudioClip;
+    [SerializeField] private AudioClip mismatchAudioClip;
+    [SerializeField] private AudioClip gamecompeltedAudioClip;
 
     private GameManager gameManager;
 
@@ -17,6 +18,7 @@ public class SoundManager : MonoBehaviour
         gameManager.OnCardFlip += PlayFlipSound;
         gameManager.OnMatch += PlayMatchSound;
         gameManager.OnMismatch += PlayMismatchSound;
+        gameManager.OnGameComplete += PlayGameCompletedSound;
     }
 
     private void OnDisable()
@@ -28,25 +30,32 @@ public class SoundManager : MonoBehaviour
 
     private void PlayFlipSound()
     {
-        if (flipSound != null)
+        if (flipAudioClip != null)
         {
-            audioSource.PlayOneShot(flipSound);
+            audioSource.PlayOneShot(flipAudioClip);
         }
     }
 
     private void PlayMatchSound()
     {
-        if (matchSound != null)
+        if (matchAudioClip != null)
         {
-            audioSource.PlayOneShot(matchSound);
+            audioSource.PlayOneShot(matchAudioClip);
         }
     }
 
     private void PlayMismatchSound()
     {
-        if (mismatchSound != null)
+        if (mismatchAudioClip != null)
         {
-            audioSource.PlayOneShot(mismatchSound);
+            audioSource.PlayOneShot(mismatchAudioClip);
+        }
+    }
+    private void PlayGameCompletedSound()
+    {
+        if (gamecompeltedAudioClip != null)
+        {
+            audioSource.PlayOneShot(gamecompeltedAudioClip);
         }
     }
 }

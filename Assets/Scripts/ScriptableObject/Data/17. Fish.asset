@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3ffa3196112609e4283b6cacb9f8ae49, type: 3}
   m_Name: 17. Fish
   m_EditorClassIdentifier: 
-  sprite: {fileID: 895635611, guid: 2546e17e75184f84db4a083265495e96, type: 3}
+  sprite: {fileID: 364369722, guid: f75c581163ec3b647b4b5c14a4f77756, type: 3}
   cardName: Fish
   cardNumber: 17

@@ -31,7 +31,7 @@ public class GameManager : MonoBehaviour
         if (cardManager != null)
         {
             cardManager.Initilize();
-            totalPairs = cardManager.totalCards / 2;
+            totalPairs = cardManager.GetTotalPair();
             matchedPairs = 0;
         }
     }

@@ -406,13 +406,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   cardLayoutManager: {fileID: 1360892538}
   cardCollectionSO: {fileID: 11400000, guid: d73fc865574609a45bc63e4edc38da41, type: 2}
-  cards: []
   cardPrefab: {fileID: 8798266863567100637, guid: 87e0acea52beb684b99a4e9437abcdd4, type: 3}
-  rows: 3
-  columns: 4
-  totalCards: 0
   cardRotationDuration: 0.5
-  selectedNumbers: 
   pairedCardIndices: 
 --- !u!1 &220472591
 GameObject:
@@ -1217,7 +1212,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &352130322
 RectTransform:
   m_ObjectHideFlags: 0
@@ -3172,9 +3167,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa62932446cfb3a45a34712d9d45b1ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flipSound: {fileID: 8300000, guid: 9968e608af04d994d96ea32a6a246665, type: 3}
-  matchSound: {fileID: 8300000, guid: ffff5b87b6674cc4d9dfecf3cc4f7e55, type: 3}
-  mismatchSound: {fileID: 8300000, guid: 40232b1506012164794f7b7a07130c84, type: 3}
+  flipAudioClip: {fileID: 8300000, guid: 9968e608af04d994d96ea32a6a246665, type: 3}
+  matchAudioClip: {fileID: 8300000, guid: ffff5b87b6674cc4d9dfecf3cc4f7e55, type: 3}
+  mismatchAudioClip: {fileID: 8300000, guid: f32fa44b9eed3f14ba3701ed48dd3dd1, type: 3}
+  gamecompeltedAudioClip: {fileID: 8300000, guid: 3e9d24016958660428031d85811a0534, type: 3}
 --- !u!82 &1435868158
 AudioSource:
   m_ObjectHideFlags: 0

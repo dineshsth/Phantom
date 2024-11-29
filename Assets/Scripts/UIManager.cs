@@ -61,7 +61,6 @@ public class UIManager : MonoBehaviour
     }
     private void LoadGame()
     {
-        // check if file exist in location;
         if (!File.Exists(SaveSystem.SaveFileName()))
         {
             DisplayMessage("No data to load");

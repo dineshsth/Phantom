@@ -7,20 +7,30 @@ public class CardManager : MonoBehaviour
     public CardLayoutManager cardLayoutManager;
     public CardCollectionSO cardCollectionSO;
 
-    public List<Card> cards = new();
+    private List<Card> cards = new();
     public Card cardPrefab;
 
-    public int rows = 5;
-    public int columns = 5;
-    public int totalCards;
-    public float cardRotationDuration = 1f;
+    private int rows = 5;
+    private int columns = 5;
 
-    public List<int> selectedNumbers = new();
+    private int totalCards;
+    [SerializeField] private float cardRotationDuration = 1f;
+
+    private List<int> selectedNumbers = new();
     public List<int> pairedCardIndices = new();
 
     static readonly System.Random random = new();
 
 
+    private void Start()
+    {
+        SetRowsAndColumns(3, 4); // setting up default value
+    }
+    public void SetRowsAndColumns(int rows, int columns)
+    {
+        this.rows = rows;
+        this.columns = columns;
+    }
     public void Initilize()
     {
         totalCards = rows * columns;
@@ -30,6 +40,7 @@ public class CardManager : MonoBehaviour
         ShufflePair(selectedNumbers);
         GenerateCards();
     }
+    public int GetTotalPair() => totalCards / 2;
 
     private List<int> GeneratePairData()
     {
