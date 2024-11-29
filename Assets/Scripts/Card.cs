@@ -45,6 +45,7 @@ public class Card : MonoBehaviour
     }
     private IEnumerator PlayShowAnimation()
     {
+        GameManager.instance.PlayFlipCardSound();
         yield return StartFlipAnimation();
         GameManager.instance.OnCardSelected(this);
     }

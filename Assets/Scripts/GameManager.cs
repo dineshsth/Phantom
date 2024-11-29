@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -11,6 +12,10 @@ public class GameManager : MonoBehaviour
     private int totalPairs;
     private int matchedPairs;
     private int turns;
+
+    public event Action OnCardFlip;
+    public event Action OnMatch;
+    public event Action OnMismatch;
 
     private void Awake()
     {
@@ -35,6 +40,7 @@ public class GameManager : MonoBehaviour
         }
     }
 
+    public void PlayFlipCardSound() => OnCardFlip?.Invoke();
     public void OnCardSelected(Card card)
     {
         if (firstCard == null)
@@ -58,11 +64,13 @@ public class GameManager : MonoBehaviour
 
         if (fCard.GetCardData().cardNumber == sCard.GetCardData().cardNumber)
         {
+            OnMatch?.Invoke();
             yield return new WaitForSeconds(.5f);
             Matched(fCard, sCard);
         }
         else
         {
+            OnMismatch?.Invoke();
             Mismatched(fCard, sCard);
         }
     }
@@ -77,7 +85,7 @@ public class GameManager : MonoBehaviour
         sCard.gameObject.SetActive(false);
 
         matchedPairs++;
-        if(matchedPairs == totalPairs)
+        if (matchedPairs == totalPairs)
         {
             Debug.Log("hello game");
         }
