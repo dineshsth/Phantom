@@ -15,6 +15,8 @@ public class Card : MonoBehaviour
     private bool cardFlipped;
     private float duration = 1f;
 
+
+
     private void Start()
     {
         backFace.SetActive(true);
@@ -22,12 +24,6 @@ public class Card : MonoBehaviour
         button.onClick.AddListener(() => { ShowCardFace(); });
     }
 
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Space))
-            HideCardFace();
-    }
     public void Initilize(CardDataSO data, float rotDuration)
     {
         cardDataSO = data;
@@ -47,8 +43,6 @@ public class Card : MonoBehaviour
     {
         StartCoroutine(PlayHideAnimation());
     }
-
-
     private IEnumerator PlayShowAnimation()
     {
         yield return StartFlipAnimation();

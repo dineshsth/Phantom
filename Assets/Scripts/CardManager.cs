@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -12,20 +11,22 @@ public class CardManager : MonoBehaviour
 
     public int rows = 5;
     public int columns = 5;
-    private int totalCards;
+    public int totalCards;
     public float cardRotationDuration = 1f;
 
     public List<int> selectedNumbers = new();
     static readonly System.Random random = new();
+    
 
-    private void Start()
+    public void Initilize()
     {
+        cardLayoutManager.enabled = true;
         totalCards = rows * columns;
 
         List<int> tempPairs = GeneratePairData();
         SelectRandomPair(tempPairs);
         ShufflePair(selectedNumbers);
-        GenerateCards();
+        GenerateCards();        
     }
 
     private List<int> GeneratePairData()
@@ -76,5 +77,12 @@ public class CardManager : MonoBehaviour
             newCard.Initilize(cardCollectionSO.cardDataSO[selectedNumbers[i]], cardRotationDuration);
             cards.Add(newCard);
         }
+
+        Invoke(nameof(SetGridOff), .2f);
+    }
+
+    private void SetGridOff()
+    {
+        cardLayoutManager.enabled = false;
     }
 }
