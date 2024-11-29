@@ -36,28 +36,6 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    public void SaveGame()
-    {
-        SaveSystem.Save();
-    }
-    public void LoadGame()
-    {
-        SaveSystem.Load();
-    }
-
-    private void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.S))
-        {
-            SaveGame();
-        }
-        if (Input.GetKeyDown(KeyCode.L))
-        {
-            LoadGame();
-        }
-    }
-
-
     public void PlayFlipCardSound() => OnCardFlip?.Invoke();
     public void OnCardSelected(Card card)
     {
@@ -107,6 +85,8 @@ public class GameManager : MonoBehaviour
         fCard.gameObject.SetActive(false);
         sCard.gameObject.SetActive(false);
 
+        cardManager.pairedCardIndices.Add(fCard.CardPositionIndex());
+        cardManager.pairedCardIndices.Add(sCard.CardPositionIndex());
 
         if (matchedPairs == totalPairs)
             OnGameComplete?.Invoke();

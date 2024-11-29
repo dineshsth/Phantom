@@ -14,6 +14,7 @@ public class Card : MonoBehaviour
     private bool isRotating;
     private bool cardFlipped;
     private float duration = 1f;
+    private int cardPositionIndex;
 
 
 
@@ -23,15 +24,20 @@ public class Card : MonoBehaviour
         button = GetComponent<Button>();
         button.onClick.AddListener(() => { ShowCardFace(); });
     }
+    private void OnDisable()
+    {
+        button.onClick.RemoveListener(() => { ShowCardFace(); });
+    }
 
-    public void Initilize(CardDataSO data, float rotDuration)
+    public void Initilize(CardDataSO data, float rotDuration, int index)
     {
         cardDataSO = data;
         img.sprite = cardDataSO.sprite;
         duration = rotDuration;
+        cardPositionIndex = index;
     }
     public CardDataSO GetCardData() => cardDataSO;
-
+    public int CardPositionIndex() => cardPositionIndex;
 
     private void ShowCardFace()
     {

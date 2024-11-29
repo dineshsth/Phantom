@@ -16,8 +16,10 @@ public class CardManager : MonoBehaviour
     public float cardRotationDuration = 1f;
 
     public List<int> selectedNumbers = new();
+    public List<int> pairedCardIndices = new();
+
     static readonly System.Random random = new();
-    
+
 
     public void Initilize()
     {
@@ -26,7 +28,7 @@ public class CardManager : MonoBehaviour
         List<int> tempPairs = GeneratePairData();
         SelectRandomPair(tempPairs);
         ShufflePair(selectedNumbers);
-        GenerateCards();        
+        GenerateCards();
     }
 
     private List<int> GeneratePairData()
@@ -76,7 +78,7 @@ public class CardManager : MonoBehaviour
         {
             Card newCard = Instantiate(cardPrefab, cardLayoutManager.transform);
             newCard.gameObject.name = cardCollectionSO.cardDataSO[selectedNumbers[i]].cardName;
-            newCard.Initilize(cardCollectionSO.cardDataSO[selectedNumbers[i]], cardRotationDuration);
+            newCard.Initilize(cardCollectionSO.cardDataSO[selectedNumbers[i]], cardRotationDuration, i);
             cards.Add(newCard);
         }
 
@@ -86,8 +88,19 @@ public class CardManager : MonoBehaviour
     private void SetGridOff()
     {
         cardLayoutManager.enabled = false;
+        DisableCardOnLoad();
     }
 
+    private void DisableCardOnLoad()
+    {
+        if (pairedCardIndices.Count > 0)
+        {
+            for (int i = 0; i < pairedCardIndices.Count; i++)
+            {
+                cards[pairedCardIndices[i]].gameObject.SetActive(false);
+            }
+        }
+    }
 
     #region save and laod
     public void Save(ref CardManagerSaveData data)
@@ -95,12 +108,15 @@ public class CardManager : MonoBehaviour
         data.rows = rows;
         data.columns = columns;
         data.selectedNumbers = selectedNumbers.ToArray();
+        data.pairedCardIndex = pairedCardIndices.ToArray();
     }
     public void Load(CardManagerSaveData data)
     {
         rows = data.rows; columns = data.columns;
         totalCards = rows * columns;
         selectedNumbers = data.selectedNumbers.ToList();
+        pairedCardIndices = data.pairedCardIndex.ToList();
+
         GenerateCards();
     }
     #endregion
@@ -113,4 +129,5 @@ public struct CardManagerSaveData
     public int columns;
 
     public int[] selectedNumbers;
+    public int[] pairedCardIndex;
 }

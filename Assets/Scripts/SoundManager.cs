@@ -18,6 +18,14 @@ public class SoundManager : MonoBehaviour
         gameManager.OnMatch += PlayMatchSound;
         gameManager.OnMismatch += PlayMismatchSound;
     }
+
+    private void OnDisable()
+    {
+        gameManager.OnCardFlip -= PlayFlipSound;
+        gameManager.OnMatch -= PlayMatchSound;
+        gameManager.OnMismatch -= PlayMismatchSound;
+    }
+
     private void PlayFlipSound()
     {
         if (flipSound != null)
